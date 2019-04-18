@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         Atbt.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                File outputImage = new File(getExternalCacheDir(),"output_image.jpg");
+                File outputImage = new File(getExternalCacheDir(),"Face_image.jpg");
 
                 try{
                     if (outputImage.exists()){
