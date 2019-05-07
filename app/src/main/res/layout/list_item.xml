@@ -9,51 +9,100 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/meetingName"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="50dp"
             android:background="#DAEDFF"
-            android:text="contact det"
             android:gravity="center_vertical"
+            android:text="会议名称："
             android:textColor="#424242"
-            android:textSize="19dp"/>
+            android:textSize="13dp" />
 
-
-        <TextView
-            android:id="@+id/txtName"
+        <Button
+            android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Founder_Name"
-            android:gravity="center_vertical"
-            android:textSize="10dp"
-            android:layout_below="@+id/title"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="7dp"/>
-
-        <TextView
-            android:id="@+id/txtEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/txtName"
+            android:layout_alignBaseline="@id/meetingName"
             android:layout_alignParentRight="true"
+            android:layout_marginTop="80dp"
+            android:layout_marginRight="48dp"
+            android:background="#DAEDFF"
+            android:gravity="center_vertical"
+            android:text="状态："
+            android:textColor="#424242"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/meetingId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/meetingName"
+            android:layout_marginLeft="7dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="219dp"
-            android:text="Email"
+            android:gravity="center_vertical"
+            android:text="会议Id："
             android:textSize="10dp" />
 
-        <Switch
-            android:id="@+id/switch1"
+        <TextView
+            android:id="@+id/founderName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/txtName"
-            android:layout_alignEnd="@+id/txtEmail"
+            android:layout_alignBaseline="@id/meetingId"
             android:layout_alignParentRight="true"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="-1dp"
-            android:layout_marginRight="150dp"
-            android:text="状态" />
+            android:layout_marginRight="140dp"
+            android:text="创建者姓名："
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/startAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/meetingName"
+            android:layout_alignStart="@+id/meetingId"
+            android:layout_alignEnd="@+id/meetingId"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="-1414dp"
+            android:layout_marginRight="-1062dp"
+            android:text="开始时间："
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/endAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/meetingName"
+            android:layout_alignStart="@+id/startAt"
+            android:layout_alignEnd="@+id/startAt"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="53dp"
+            android:layout_marginEnd="-1414dp"
+            android:layout_marginRight="-1062dp"
+            android:text="结束时间："
+            android:textSize="10dp" />
+
+        <Button
+            android:id="@+id/hc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/meetingName"
+            android:layout_alignStart="@+id/endAt"
+            android:layout_alignEnd="@+id/endAt"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="69dp"
+            android:layout_marginEnd="10dp"
+            android:text="签到人数/参会人数："
+            android:textSize="10dp" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

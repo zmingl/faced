@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mei.faced.MainActivity">
-
+    tools:context=".AttendanceActivity">
     <TextView
-        android:id="@+id/appname"
+        android:id="@+id/Attendees_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="视频签到"
+        android:text="注册或登录"
         android:textSize="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.62"
@@ -20,12 +19,13 @@
         app:layout_constraintVertical_bias="0.247" />
 
     <TextView
-        android:id="@+id/introduce"
-        android:layout_width="211dp"
-        android:layout_height="18dp"
-        android:text="这是一个基于人脸识别的签到系统"
+        android:id="@+id/introduce_att"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="请选择人脸注册或者识别登录"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/appname"
+        app:layout_constraintEnd_toEndOf="@+id/Attendees_name"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent"
@@ -33,12 +33,12 @@
 
 
     <Button
-        android:id="@+id/Attendees"
+        android:id="@+id/register"
         style="@android:style/Widget.Button.Toggle"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#9cff7194"
-        android:text="我是参会者"
+        android:text="人脸注册"
         android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -47,18 +47,18 @@
         app:layout_constraintVertical_bias="0.814" />
 
     <Button
-        android:id="@+id/Administrators"
+        android:id="@+id/login"
         style="@android:style/Widget.Button.Toggle"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#7cf985ac"
-        android:text="我是管理员"
+        android:text="登录签到"
         android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/Attendees"
+        app:layout_constraintEnd_toEndOf="@+id/register"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/Attendees"
+        app:layout_constraintStart_toStartOf="@+id/register"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.943" />
 
@@ -67,12 +67,11 @@
         android:layout_width="38dp"
         android:layout_height="40dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/appname"
-        app:layout_constraintEnd_toStartOf="@+id/appname"
+        app:layout_constraintBottom_toBottomOf="@+id/Attendees_name"
+        app:layout_constraintEnd_toStartOf="@+id/Attendees_name"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/appname"
+        app:layout_constraintTop_toTopOf="@+id/Attendees_name"
         app:srcCompat="@android:drawable/presence_video_busy" />
-
 
 </android.support.constraint.ConstraintLayout>
