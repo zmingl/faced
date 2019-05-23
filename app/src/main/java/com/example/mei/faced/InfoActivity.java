@@ -88,7 +88,7 @@ public class InfoActivity extends AppCompatActivity {
                         //转换成Base64字符串
                         String base64 = Base64.encodeToString(baos.toByteArray(),Base64.NO_WRAP);
                         ServiceProvider serviceProvider = ServiceProvider.getInstance(getApplicationContext());
-                        String url = "http://192.168.1.2:8000/accounts/register";
+                        String url = getResources().getString(R.string.server_host)+"register";
                         Response.Listener listener = new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {

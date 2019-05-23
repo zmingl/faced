@@ -91,10 +91,7 @@ class HttpRequest<T> extends JsonRequest<T> {
 
 
         try {
-            String jsonString =
-                    new String(
-                            response.data,
-                            HttpHeaderParser.parseCharset(response.headers, PROTOCOL_CHARSET));
+            String jsonString = new String(response.data, HttpHeaderParser.parseCharset(response.headers, PROTOCOL_CHARSET));
             try {
                 return Response.success((T)(new JSONObject(jsonString)), HttpHeaderParser.parseCacheHeaders(response));
             } catch (Exception e) {

@@ -51,16 +51,14 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
         meetingViewHolder.startAt.setText(ci.startAt);
         meetingViewHolder.endAt.setText(ci.endAt);
         meetingViewHolder.hc.setText(ci.hc);
-        ////////////hc
-
-
 
         if (meetingViewHolder.status.getText().equals("状态：点击此处签到")){
             meetingViewHolder.status.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                ServiceProvider serviceProvider = ServiceProvider.getInstance(ListActivity.instance.getApplicationContext());
-                String url = "http://192.168.1.2:8000/accounts/update_user_meeting";
+                    Context context = ListActivity.instance.getApplicationContext();
+                ServiceProvider serviceProvider = ServiceProvider.getInstance(context);
+                String url = context.getResources().getString(R.string.server_host)+"update_user_meeting";
                 Response.Listener listener = new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

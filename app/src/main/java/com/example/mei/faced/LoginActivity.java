@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
                 String pw = password.getText().toString();
                 if(!TextUtils.isEmpty(un)&&!TextUtils.isEmpty(pw)){
                     ServiceProvider serviceProvider = ServiceProvider.getInstance(getApplicationContext());
-                    String url = "http://192.168.1.2:8000/accounts/admin_login?mobile="+un+"&password="+pw;
+                    String url = getResources().getString(R.string.server_host)+"admin_login?mobile="+un+"&password="+pw;
                     Response.Listener listener = new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {

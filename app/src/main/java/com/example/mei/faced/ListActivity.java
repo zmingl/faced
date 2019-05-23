@@ -55,13 +55,7 @@ public class ListActivity extends AppCompatActivity {
                 if (who.equals("att")){
                     showInputDialog();
                 }else{
-                    ////
-                    ///
-                    ////
-                    /////创建会议
-                    ///
-                    ///
-                    Intent intent = new Intent(ListActivity.this,ListActivity.class);
+                    Intent intent = new Intent(ListActivity.this,CreateMeetingActivity.class);
                     intent.putExtra("who",who);
                     startActivity(intent);
                 }
@@ -78,7 +72,7 @@ public class ListActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 ServiceProvider serviceProvider = ServiceProvider.getInstance(getApplicationContext());
-                                String url = "http://192.168.1.2:8000/accounts/addusers";
+                                String url = getResources().getString(R.string.server_host)+"addusers";
                                 Response.Listener listener = new Response.Listener<JSONObject>() {
                                     @Override
                                     public void onResponse(JSONObject response) {
@@ -119,10 +113,10 @@ public class ListActivity extends AppCompatActivity {
         //获取会议列表的网络请求
         ServiceProvider serviceProvider = ServiceProvider.getInstance(getApplicationContext());
         if (who.equals("att")){
-            url = "http://192.168.1.2:8000/accounts/att_meeting_list";
+            url = getResources().getString(R.string.server_host)+"att_meeting_list";
         }
         else{
-            url = "http://192.168.1.2:8000/accounts/create_meeting_list";
+            url = getResources().getString(R.string.server_host)+"create_meeting_list";
         }
         Response.Listener listener = new Response.Listener<JSONArray>() {
             @Override
@@ -131,7 +125,7 @@ public class ListActivity extends AppCompatActivity {
                     Log.d(getClass().toString(), "onResponse: " + response);
                     List<MeetingInfo> result = new ArrayList<MeetingInfo>();
                     if (response.length()==0){
-                        Toast.makeText(ListActivity.this, "您暂时尚未参加会议", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ListActivity.this, "与您有关的会议数为0", Toast.LENGTH_SHORT).show();
                     }
                     for (int i=0;i<response.length();i++) {
                         JSONObject json = (JSONObject)response.get(i);
@@ -192,9 +186,6 @@ public class ListActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
-
-
-
     }
 
 
