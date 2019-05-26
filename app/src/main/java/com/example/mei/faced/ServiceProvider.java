@@ -103,7 +103,6 @@ class HttpRequest<T> extends JsonRequest<T> {
         } catch (JSONException je) {
             return Response.error(new ParseError(je));
         }
-
     }
 }
 

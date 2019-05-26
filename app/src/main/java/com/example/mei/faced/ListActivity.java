@@ -84,15 +84,15 @@ public class ListActivity extends AppCompatActivity {
                                                 //如果正确
                                                 finish();
                                                 startActivity(getIntent());
-                                                Toast.makeText(ListActivity.this, "恭喜你，成功加入"+editText.getText().toString()+"号会议", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ListActivity.this,
+                                                        "恭喜你，成功加入"+editText.getText().toString()+"号会议",
+                                                        Toast.LENGTH_SHORT).show();
                                             }
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
-                                        Log.d(this.getClass().toString(), "onResponse: " + response.toString());
                                     }
                                 };
-
                                 Response.ErrorListener errorListener = new Response.ErrorListener() {
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
