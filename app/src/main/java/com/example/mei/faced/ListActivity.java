@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -35,6 +36,9 @@ public class ListActivity extends AppCompatActivity {
     private String url;
     private RecyclerView recList = null;
     public static ListActivity instance = null;
+    protected String who;
+    private boolean run = false;
+    private final Handler handler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +50,7 @@ public class ListActivity extends AppCompatActivity {
         //判断请求会议列表者的身份
         Intent intent = getIntent();
         final String who = intent.getStringExtra("who");
-
+        this.who=who;
         //"+" button
         FloatingActionButton addMeeting = (FloatingActionButton) findViewById(R.id.addMeeting);
         addMeeting.setOnClickListener(new View.OnClickListener() {
@@ -108,76 +112,7 @@ public class ListActivity extends AppCompatActivity {
                         }).show();
             }
         });
-
-
-        //获取会议列表的网络请求
-        ServiceProvider serviceProvider = ServiceProvider.getInstance(getApplicationContext());
-        if (who.equals("att")){
-            url = getResources().getString(R.string.server_host)+"att_meeting_list";
-        }
-        else{
-            url = getResources().getString(R.string.server_host)+"create_meeting_list";
-        }
-        Response.Listener listener = new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                try {
-                    Log.d(getClass().toString(), "onResponse: " + response);
-                    List<MeetingInfo> result = new ArrayList<MeetingInfo>();
-                    if (response.length()==0){
-                        Toast.makeText(ListActivity.this, "与您有关的会议数为0", Toast.LENGTH_SHORT).show();
-                    }
-                    for (int i=0;i<response.length();i++) {
-                        JSONObject json = (JSONObject)response.get(i);
-                        String meetingId = json.getInt("id") + "";
-                        String meetingName = json.getString("name");
-                        String startAt = json.getString("start_at");
-                        String endAt = json.getString("end_at");
-                        String status = json.optString("status");
-                        String founderName= json.getString("founder_name");
-                        String hc = json.getInt("hc") + "";
-                        String total = json.getInt("total") + "";
-                        //转换从数据库获取的date的格式
-                        LocalDate startTime = LocalDate.parse(startAt, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
-                        LocalDate endTime = LocalDate.parse(endAt, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
-                        LocalDate now = LocalDate.now();
-                            if (startTime.isAfter(now)){
-                                status = "未开始";
-                            }else if (now.isAfter(endTime)){
-                                    status = "已结束";
-                            }else if (who.equals("att") && status.equals("未签到")) {
-                                //更新数据库签到状态
-                                status = "点击此处签到";
-                            } else if (who.equals("att") && status.equals("已签到")) {
-                                //更新数据库签到状态
-                                status = "已签到";
-                            } else {
-                                status = "进行中";
-                            }
-                        appendMeeting(result,meetingName,meetingId,founderName,startAt,endAt,status,hc,total);
-                       // Log.d(getClass().toString(), "Object: " + o);
-                    }
-                    MeetingAdapter ca = new MeetingAdapter(result);
-                    recList.setAdapter(ca);
-
-//                    createList();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                Log.d(this.getClass().toString(), "onResponse: " + response.toString());
-            }
-        };
-
-        Response.ErrorListener errorListener = new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d(this.getClass().toString(), "onResponse: ");
-                Toast.makeText(ListActivity.this,"会议列表获取失败",Toast.LENGTH_SHORT).show();
-            }
-
-        };
-        serviceProvider.request(url, null,listener,errorListener);
-
+        run = true;
         /*
         RecyclerView 的相关设置
          */
@@ -186,11 +121,101 @@ public class ListActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
+
+        handler.postDelayed(task, 100);
+
+
     }
 
+    private final Runnable task = new Runnable() {
+        @Override
+        public void run() {
+            // TODO Auto-generated method stub
+            if (run) {
 
 
-    private void appendMeeting(List<MeetingInfo> list,String mn,String mi,String fn,String sa,String ea,String st,String hc,String total) {
+
+
+                //获取会议列表的网络请求
+                ServiceProvider serviceProvider = ServiceProvider.getInstance(getApplicationContext());
+                if (who.equals("att")){
+                    url = getResources().getString(R.string.server_host)+"att_meeting_list";
+                }
+                else{
+                    url = getResources().getString(R.string.server_host)+"create_meeting_list";
+                }
+                Response.Listener listener = new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            Log.d(getClass().toString(), "onResponse: " + response);
+                            List<MeetingInfo> result = new ArrayList<MeetingInfo>();
+                            if (response.length()==0){
+                                Toast.makeText(ListActivity.this, "与您有关的会议数为0", Toast.LENGTH_SHORT).show();
+                            }
+                            for (int i=0;i<response.length();i++) {
+                                JSONObject json = (JSONObject)response.get(i);
+                                String meetingId = json.getInt("id") + "";
+                                String meetingName = json.getString("name");
+                                String startAt = json.getString("start_at");
+                                String endAt = json.getString("end_at");
+                                String status = json.optString("status");
+                                String founderName= json.getString("founder_name");
+                                String hc = json.getInt("hc") + "";
+                                String total = json.getInt("total") + "";
+                                //转换从数据库获取的date的格式
+                                LocalDate startTime = LocalDate.parse(startAt, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+                                LocalDate endTime = LocalDate.parse(endAt, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+                                LocalDate now = LocalDate.now();
+                                if (startTime.isAfter(now)){
+                                    status = "未开始";
+                                }else if (now.isAfter(endTime)){
+                                    status = "已结束";
+                                }else if (who.equals("att") && status.equals("未签到")) {
+                                    //更新数据库签到状态
+                                    status = "点击此处签到";
+                                } else if (who.equals("att") && status.equals("已签到")) {
+                                    //更新数据库签到状态
+                                    status = "已签到";
+                                } else {
+                                    status = "进行中";
+                                }
+                                appendMeeting(result,meetingName,meetingId,founderName,startAt,endAt,status,hc,total);
+                                // Log.d(getClass().toString(), "Object: " + o);
+                            }
+                            MeetingAdapter ca = new MeetingAdapter(result);
+                            recList.setAdapter(ca);
+
+//                    createList();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        Log.d(this.getClass().toString(), "onResponse: " + response.toString());
+                    }
+                };
+
+                Response.ErrorListener errorListener = new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(this.getClass().toString(), "onResponse: ");
+                        Toast.makeText(ListActivity.this,"会议列表获取失败",Toast.LENGTH_SHORT).show();
+                    }
+
+                };
+                serviceProvider.request(url, null,listener,errorListener);
+
+                handler.postDelayed(this, 10000);
+            }
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
+    }
+
+    private void appendMeeting(List<MeetingInfo> list, String mn, String mi, String fn, String sa, String ea, String st, String hc, String total) {
         MeetingInfo ci = new MeetingInfo();
         ci.meetingName = MeetingInfo.MTN_PREFIX + mn;
         ci.status = MeetingInfo.ST_PREFIX + st;

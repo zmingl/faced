@@ -35,6 +35,7 @@
         android:backgroundTint="#9cff7194"
         android:text="添加照片"
         android:textColor="#ffffff"
+        android:background="@drawable/shape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.834"

@@ -29,7 +29,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="80dp"
             android:layout_marginRight="48dp"
-            android:background="#DAEDFF"
+            android:background="@drawable/shape"
             android:gravity="center_vertical"
             android:text="状态："
             android:textColor="#424242"
@@ -102,6 +102,7 @@
             android:layout_marginTop="69dp"
             android:layout_marginEnd="10dp"
             android:text="签到人数/参会人数："
+            android:background="@drawable/shape"
             android:textSize="10dp" />
 
     </RelativeLayout>
