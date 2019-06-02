@@ -52,14 +52,24 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
         meetingViewHolder.endAt.setText(ci.endAt);
         meetingViewHolder.hc.setText(ci.hc);
 
+        meetingViewHolder.hc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = ListActivity.instance.getApplicationContext();
+                Intent intent = new Intent(ListActivity.instance,PersonActivity.class);
+                intent.putExtra("meeting_id",ci.meetingId);
+                context.startActivity(intent);
+            }
+        });
+
         if (meetingViewHolder.status.getText().equals("状态：点击此处签到")){
             meetingViewHolder.status.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Context context = ListActivity.instance.getApplicationContext();
-                ServiceProvider serviceProvider = ServiceProvider.getInstance(context);
-                String url = context.getResources().getString(R.string.server_host)+"update_user_meeting";
-                Response.Listener listener = new Response.Listener<JSONObject>() {
+                    ServiceProvider serviceProvider = ServiceProvider.getInstance(context);
+                    String url = context.getResources().getString(R.string.server_host)+"update_user_meeting";
+                    Response.Listener listener = new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         /** { "status": "OK"  } */

@@ -48,7 +48,7 @@ public class ListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //判断请求会议列表者的身份
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         final String who = intent.getStringExtra("who");
         this.who=who;
         //"+" button
@@ -132,10 +132,6 @@ public class ListActivity extends AppCompatActivity {
         public void run() {
             // TODO Auto-generated method stub
             if (run) {
-
-
-
-
                 //获取会议列表的网络请求
                 ServiceProvider serviceProvider = ServiceProvider.getInstance(getApplicationContext());
                 if (who.equals("att")){
