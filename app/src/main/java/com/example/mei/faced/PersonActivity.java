@@ -51,7 +51,7 @@ public class PersonActivity extends AppCompatActivity {
                     }
                     for (int i=0;i<response.length();i++) {
                         JSONObject json = (JSONObject)response.get(i);
-                        String peresonName = json.getString("user");
+                        String peresonName = json.getString("name");
                         String personstatus = json.optString("status");
 
                         appendPerson(result,peresonName,personstatus);

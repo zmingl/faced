@@ -61,6 +61,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
                                 Intent intent = new Intent(CreateMeetingActivity.this,ListActivity.class);
                                 intent.putExtra("who",who);
                                 startActivity(intent);
+                                finish();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -87,5 +88,9 @@ public class CreateMeetingActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
     }
 }

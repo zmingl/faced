@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="20dp"
-    card_view:cardElevation="10dp"
+    card_view:cardElevation="4dp"
     android:layout_margin="5dp">
 
     <RelativeLayout
@@ -19,7 +19,6 @@
             android:layout_marginLeft="20dp"
             android:layout_alignParentRight="true"
             android:gravity="center_vertical"
-            android:text="姓名:"
             android:textColor="#424242"
             android:textSize="13dp" />
 
@@ -33,7 +32,6 @@
             android:layout_marginRight="70dp"
             android:background="@drawable/shape"
             android:gravity="center_vertical"
-            android:text="状态："
             android:textColor="#424242"
             android:textSize="13dp" />
 

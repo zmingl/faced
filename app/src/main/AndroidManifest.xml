@@ -18,7 +18,8 @@
             android:name=".PersonActivity"
             android:label="@string/title_activity_person"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".CreateMeetingActivity" />
+        <activity android:name=".CreateMeetingActivity"
+            android:launchMode="singleInstance"/>
         <activity android:name=".SendPhotoActivity" />
         <activity android:name=".InfoActivity" />
         <activity android:name=".AttendanceActivity" />

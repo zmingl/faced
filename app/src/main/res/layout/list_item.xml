@@ -4,7 +4,7 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardCornerRadius="10dp"
+    card_view:cardCornerRadius="20dp"
     android:layout_margin="5dp">
 
     <RelativeLayout
@@ -15,7 +15,7 @@
             android:id="@+id/meetingName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="#DAEDFF"
+            android:background="@color/colorPrimaryDark"
             android:gravity="center_vertical"
             android:text="会议名称："
             android:textColor="#424242"

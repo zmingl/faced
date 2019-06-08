@@ -122,7 +122,7 @@ public class ListActivity extends AppCompatActivity {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
 
-        handler.postDelayed(task, 100);
+        handler.postDelayed(task, 500);
 
 
     }
@@ -206,8 +206,20 @@ public class ListActivity extends AppCompatActivity {
     };
 
     @Override
+    protected void onRestart(){
+        super.onRestart();
+        handler.post(task);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
         handler.removeCallbacksAndMessages(null);
     }
 

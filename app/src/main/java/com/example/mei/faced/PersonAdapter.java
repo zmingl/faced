@@ -40,9 +40,9 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
-        final PersonInfo ci = personList.get(i);
-        personViewHolder.PersonName.setText(PN_PREFIX + ci.person_name);
-        personViewHolder.Personstatus.setText(PS_PREFIX + ci.person_status);
+        final PersonInfo pi = personList.get(i);
+        personViewHolder.PersonName.setText(pi.person_name);
+        personViewHolder.Personstatus.setText(pi.person_status);
     }
 
     @Override
